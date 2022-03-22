@@ -15,3 +15,9 @@ canvas-sketch sketch-01.js --new
 ```console
 canvas-sketch sketch-01.js
 ```
+
+### run canvas with output to export/01
+
+```console
+canvas-sketch sketch-01.js --output=export/01
+```

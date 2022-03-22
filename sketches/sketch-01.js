@@ -8,7 +8,11 @@ const settings = {
 };
 
 const sketch = () => {
-  return ({ context, width, height }) => {
+  return ({
+    context,
+    width,
+    height
+  }) => {
 
     context.fillStyle = 'white';
     context.fillRect(0, 0, width, height);
@@ -34,7 +38,7 @@ const sketch = () => {
 
         if (Math.random() > 0.5) {
           context.beginPath();
-          context.rect(x + off/2, y + off/2, w - off, h - off);
+          context.rect(x + off / 2, y + off / 2, w - off, h - off);
           context.stroke();
         }
       }

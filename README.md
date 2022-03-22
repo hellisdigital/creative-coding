@@ -9,3 +9,9 @@ npm install canvas-sketch-cli -g
 ```console
 canvas-sketch sketch-01.js --new
 ```
+
+### run canvas
+
+```console
+canvas-sketch sketch-01.js
+```

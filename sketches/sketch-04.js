@@ -6,6 +6,13 @@ const settings = {
   animate: true
 };
 
+// animation without canvas sketch
+// animate();
+const animate = () => {
+  console.log('a');
+  requestAnimationFrame(animate);
+}
+
 const sketch = ({
   context,
   width,

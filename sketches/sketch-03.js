@@ -3,14 +3,18 @@ const canvasSketch = require('canvas-sketch');
 const math = require('canvas-sketch-util/math');
 const random = require('canvas-sketch-util/random')
 const settings = {
-  dimensions: [1080, 1080]
+  dimensions: [1080, 1080],
+  animate: true,
+  playbackRate: 'throttle',
+  fps: 5
 };
 
 const sketch = () => {
   return ({
     context,
     width,
-    height
+    height,
+    playhead
   }) => {
     context.fillStyle = 'white';
     context.fillRect(0, 0, width, height);
@@ -25,7 +29,7 @@ const sketch = () => {
     const w = width * 0.01;
     const h = height * 0.1;
 
-    const num = 40;
+    const num = 30;
     let radius = width * 0.3;
 
     cx = 0;

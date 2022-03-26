@@ -4,6 +4,10 @@ const settings = {
   dimensions: [1080, 1080]
 };
 
+const degToRad = (degrees) => {
+  return degrees / 180 * Math.PI;
+}
+
 const sketch = () => {
   return ({
     context,
@@ -17,13 +21,13 @@ const sketch = () => {
 
     const x = width * 0.5;
     const y = height * 0.5;
-    const w = width * 0.3;
+    const w = width * 0.5;
     const h = height * 0.3;
 
     context.save();
 
     context.translate(x, y);
-    context.rotate(0.6);
+    context.rotate(45 / 180 * Math.PI); // convert 45 deg to rad
     context.beginPath();
     context.rect(-w / 2, -h / 2, w, h);
     context.fill();

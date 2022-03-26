@@ -17,15 +17,20 @@ const sketch = () => {
 
     context.fillStyle = '#000';
 
-    const cx = width * 0.5;
-    const cy = height * 0.5;
+    let cx = width * 0.5;
+    let cy = height * 0.5;
+
+
 
     const w = width * 0.01;
     const h = height * 0.1;
 
     const num = 40;
-    const radius = width * 0.3;
+    let radius = width * 0.3;
 
+    cx = 0;
+    cy = 0;
+    radius = width * 0.7
 
     let x, y;
     for (let i = 0; i < num; i++) {

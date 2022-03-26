@@ -2,7 +2,8 @@ const canvasSketch = require('canvas-sketch');
 const rd = require('canvas-sketch-util/random');
 
 const settings = {
-  dimensions: [1080, 1080]
+  dimensions: [1080, 1080],
+  animate: true
 };
 
 const sketch = ({
@@ -32,6 +33,7 @@ const sketch = ({
     //agentA.draw(context);
 
     agents.forEach((agent, i) => {
+      agent.update();
       agent.draw(context)
     });
   };
@@ -39,7 +41,7 @@ const sketch = ({
 
 canvasSketch(sketch, settings);
 
-class Point {
+class Vector {
   constructor(x, y) {
     this.x = x;
     this.y = y;
@@ -49,13 +51,27 @@ class Point {
 
 class Agent {
   constructor(x, y) {
-    this.pos = new Point(x, y);
-    this.radius = 10;
+    this.pos = new Vector(x, y);
+    this.vel = new Vector(rd.range(-1, 1), rd.range(-1, 1));
+    this.radius = rd.range(4, 12);
   }
+
+  update() {
+    this.pos.x += this.vel.x;
+    this.pos.y += this.vel.y;
+  }
+
   draw(context) {
-    context.fillStyle = "#000";
+    context.save();
+    context.translate(this.pos.x, this.pos.y);
+
+    context.lineWidth = 4;
+
     context.beginPath();
-    context.arc(this.pos.x, this.pos.y, this.radius, 0, Math.PI * 2);
+    context.arc(0, 0, this.radius, 0, Math.PI * 2);
     context.fill();
+    context.stroke();
+
+    context.restore();
   }
 };

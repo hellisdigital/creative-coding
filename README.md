@@ -21,3 +21,15 @@ canvas-sketch sketch-01.js
 ```console
 canvas-sketch sketch-01.js --output=export/01
 ```
+
+### run canvas with video output
+
+```console
+canvas-sketch sketch-04.js --output=export/04 --stream
+```
+
+**save video with shorcut**
+
+ ```keyboard
+CTRL + SHIFT + S
+```

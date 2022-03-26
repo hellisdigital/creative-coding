@@ -41,7 +41,8 @@ const sketch = ({
 
     agents.forEach((agent, i) => {
       agent.update();
-      agent.draw(context)
+      agent.draw(context);
+      agent.bounce(width, height);
     });
   };
 };
@@ -61,6 +62,12 @@ class Agent {
     this.pos = new Vector(x, y);
     this.vel = new Vector(rd.range(-1, 1), rd.range(-1, 1));
     this.radius = rd.range(4, 12);
+  }
+
+  bounce(width, height) {
+
+    if (this.pos.x <= 0 || this.pos.x >= width) this.vel.x *= -1;
+    if (this.pos.y <= 0 || this.pos.y >= height) this.vel.y *= -1;
   }
 
   update() {

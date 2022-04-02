@@ -1,5 +1,5 @@
 const canvasSketch = require("canvas-sketch");
-
+const csRandom = require("canvas-sketch-util/random")
 //var f = new FontFace('BIZUDPMincho', 'url(fonts/BIZUDPMincho-Regular.ttf)');
 var f = new FontFace("VCRmono", "url(fonts/VCR_OSD_MONO_1.001.ttf)");
 
@@ -12,7 +12,7 @@ let manager;
 let text = "A";
 let fontSize = 1200;
 let fontFamily = "VCRmono";
-//fontFamily = 'serif'
+fontFamily = 'serif'
 
 const typeCanvas = document.createElement("canvas");
 const typeContext = typeCanvas.getContext("2d");
@@ -64,6 +64,12 @@ const sketch = ({ context, width, height }) => {
 
     //context.drawImage(typeCanvas, 0, 0);
 
+    context.fillStyle = "black";
+    context.fillRect(0, 0, width, height);
+
+    context.textBaseline = 'middle';
+    context.textAlign = 'center'
+
     for (let i = 0; i < numCells; i++) {
       const col = i % numCols;
       const row = Math.floor(i / numCols);
@@ -75,20 +81,39 @@ const sketch = ({ context, width, height }) => {
       const g = typeData[i * 4 + 1];
       const b = typeData[i * 4 + 2];
 
-      context.fillStyle = `rgb(${r},${g},${b})`;
+      const glyph = getGlyph(r);
+
+      context.fillStyle = "white"; //`rgb(${r},${g},${b})`;
       context.save();
       context.translate(x, y);
       context.translate(cell / 2, cell / 2);
       //context.fillRect(0,0,cell,cell)
 
       context.beginPath();
-      context.arc(0, 0, cell / 2, 0, Math.PI * 2);
+      //context.arc(0, 0, cell / 2, 0, Math.PI * 2);
+
+      context.font = `${cell * 2}px ${fontFamily}`;
+
+      if (Math.random() < 0.1) context.font = `${cell * 6}px ${fontFamily}`;
+
+      context.fillText(glyph, 0, 0);
       context.fill();
 
       context.restore();
       //console.log(typeData)
     }
   };
+};
+
+const getGlyph = (r) => {
+  if (r < 50) return ""
+  if (r < 100) return ".";
+  if (r < 150) return csRandom.pick(['pies','to','ucieczka','dyrektor','obowiązek']);
+  if (r < 200) return "+";
+    
+  const glyphs = '+_/='.split('');
+
+  return csRandom.pick(glyphs);
 };
 
 f.load().then(function (loaded_face) {
